@@ -81,14 +81,7 @@ body {
 /* -------------------------------------------------------------------------- */
 // Firefox accounts form iframe
 
-#fxa {
-    border: none;
-    min-height: 220px;
-    position: relative;
-    width: 318px;
-}
-
-#fxa-iframe-config {
+#fxa-form-wrapper {
     background: #fff;
     margin: 20px auto;
     padding: 30px 0;
@@ -109,7 +102,7 @@ body {
     color: #0a84ff;
     cursor: pointer;
     display: block;
-    margin: 10px auto 0 auto;
+    margin: 20px auto 0 auto;
     min-height: 24px;
     padding: 5px 10px;
     transition: background-color 150ms, color 150ms, border-color 150ms;
@@ -204,14 +197,14 @@ body {
     transform: translateY(-5px);
 }
 
-#fxa-iframe-config {
+#fxa-form-wrapper {
     opacity: 0;
     transform: scale(.8);
 }
 
 // transition in
 #scene[data-content=true] {
-    #fxa-iframe-config {
+    #fxa-form-wrapper {
         opacity: 1;
         transform: scale(1);
         transition: opacity 1s 1s, transform 1s 1s;

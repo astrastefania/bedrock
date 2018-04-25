@@ -314,8 +314,8 @@ PIPELINE_CSS = {
     },
     'firefox_firstrun_quantum': {
         'source_filenames': (
+            'css/base/mozilla-fxa-form.scss',
             'css/firefox/firstrun/firstrun-quantum.scss',
-            'css/base/mozilla-fxa-iframe.scss',
         ),
         'output_filename': 'css/firefox_firstrun_quantum-bundle.css',
     },
@@ -1023,7 +1023,7 @@ PIPELINE_JS = {
     'firefox_firstrun_quantum': {
         'source_filenames': (
             'js/base/uitour-lib.js',
-            'js/base/mozilla-fxa-iframe.js',
+            'js/base/mozilla-fxa-form.js',
             'js/firefox/firstrun/firstrun_quantum.js',
         ),
         'output_filename': 'js/firefox_firstrun_quantum-bundle.js',

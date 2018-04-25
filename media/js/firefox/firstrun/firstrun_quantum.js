@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-(function (Mozilla) {
+(function(Mozilla) {
     'use strict';
 
     // Add class to indicate Windows 8 and later
@@ -15,26 +15,7 @@
         var scene = document.getElementById('scene');
         var skipbutton = document.getElementById('skip-button');
 
-        var hideOrShowSkipButton = function (data) {
-            switch(data.data.url) {
-            case '':
-            case 'signin':
-            case 'signup':
-            case 'reset_password':
-                skipbutton.disabled = false;
-                skipbutton.classList.remove('skipbutton-hidden');
-                break;
-            default:
-                skipbutton.classList.add('skipbutton-hidden');
-                break;
-            }
-        };
-
-        var disableSkipButton = function () {
-            skipbutton.disabled = true;
-        };
-
-        var onVerificationComplete = function () {
+        var isSignedIn = function() {
             scene.dataset.signIn = 'true';
             // Specially navigate to about:newtab and focus address bar
             if (redirectDest === 'about:newtab') {
@@ -44,36 +25,27 @@
             }
         };
 
-        skipbutton.onclick = onVerificationComplete;
+        skipbutton.onclick = isSignedIn;
 
         if (syncConfig) {
             window.setTimeout(function() {
-                onVerificationComplete();
+                isSignedIn();
             }, 1000);
         } else {
             scene.dataset.content = 'true';
         }
 
         Mozilla.Client.getFirefoxDetails(function(data) {
-            Mozilla.FxaIframe.init({
-                distribution: data.distribution,
-                gaEventName: 'firstrun-fxa',
-                onVerificationComplete: onVerificationComplete,
-                onLogin: onVerificationComplete,
-                onFormEngaged: disableSkipButton,
-                onNavigated: hideOrShowSkipButton
-            });
-
             if (data.distribution && data.distribution.toLowerCase() === 'mozillaonline') {
                 redirectDest = 'https://start.firefoxchina.cn/';
             }
         });
     };
 
-    document.onreadystatechange = function() {
+    document.onreadystatechange = function () {
         if (document.readyState === 'complete') {
             var syncConfig;
-            Mozilla.UITour.getConfiguration('sync', function(config) {
+            Mozilla.UITour.getConfiguration('sync', function (config) {
                 syncConfig = config.setup;
                 beginAnimation(syncConfig);
             });
