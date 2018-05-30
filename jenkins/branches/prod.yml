@@ -7,6 +7,7 @@ regions:
   - oregon-b
   - tokyo
   - frankfurt
+  - iowa-a
 apps:
   - bedrock-stage
   - bedrock-prod
@@ -21,4 +22,6 @@ integration_tests:
   tokyo:
     - headless
   frankfurt:
+    - headless
+  iowa-a:
     - headless
