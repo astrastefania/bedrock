@@ -25,12 +25,14 @@ This iteration of /whatsnew has multiple states:
     'use strict';
 
     var client = Mozilla.Client;
-    var sendTo = document.getElementById('send-to-device');
     var mainContent = document.querySelector('.main-content');
     var $strings = $('#strings');
 
     function showFxa() {
+        // Show the content
         mainContent.classList.add('show-fxa');
+
+        // Set the title
         document.title = $strings.data('fxaccount-title');
 
         // initialize the FxA iframe
@@ -43,19 +45,30 @@ This iteration of /whatsnew has multiple states:
     }
 
     function showFirefoxMobile() {
+        var widgetId = 'send-firefox';
+
+        // Show the content
         mainContent.classList.add('show-fx-mobile');
+
+        // Set the title
         document.title = $strings.data('fxmobile-title');
 
         // initialize Send to Device widget if present/available
-        if (sendTo) {
-            var form = new Mozilla.SendToDevice();
+        if (widgetId) {
+            var form = new Mozilla.SendYourself(widgetId);
             form.init();
         }
     }
 
     function showFocus() {
+        var widgetId = 'send-focus';
         var logoFx = document.getElementById('logo-fx');
         var logoFocus = document.getElementById('logo-focus');
+
+        // Show the content
+        mainContent.classList.add('show-focus');
+
+        // Set the title
         document.title = $strings.data('fxfocus-title');
 
         // swap out Firefox logo for Focus logo
@@ -65,7 +78,11 @@ This iteration of /whatsnew has multiple states:
             logoFocus.classList.replace('hiding', 'showing');
         }, 150);
 
-        mainContent.classList.add('show-focus');
+        // initialize Send to Device widget if present/available
+        if (widgetId) {
+            var form = new Mozilla.SendYourself(widgetId);
+            form.init();
+        }
     }
 
     // bug 1419573 - only show "Your Firefox is up to date" if it's the latest version.

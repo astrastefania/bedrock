@@ -236,3 +236,66 @@
     </footer>
   </section>
 {%- endmacro %}
+
+
+{% macro send_yourself(include_title=True, title_text='', ios_link='', spinner_color='', message_set='default', id='send-yourself', product='firefox') %}
+  {# If no App Store link is specified, use base with default "ct" param value #}
+  {# See https://bugzilla.mozilla.org/show_bug.cgi?id=1196310#c23 #}
+  {% if ios_link == '' %}
+    {% if product == 'focus' %}
+      {% if locale == 'de' %}
+        {% set ios_link = 'Klar_iOS_link' %}
+        {% set android_link = 'Klar_Android_link' %}
+      {% else %}
+        {% set ios_link = 'Focus_iOS_link' %}
+        {% set android_link = 'Focus_Android_link' %}
+      {% endif %}
+    {% else %}
+      {% set ios_link = firefox_ios_url('mozorg') %}
+      {% set android_link = settings.GOOGLE_PLAY_FIREFOX_LINK %}
+    {% endif %}
+  {% endif %}
+  <section id="{{ id }}" class="mzp-c-sendyourself {% if include_title %}title{% else %}no-title{% endif %}" data-countries="{{ send_to_device_sms_countries(message_set) }}"{% if spinner_color %} data-spinner-color="{{ spinner_color }}"{% endif %}>
+    <div class="mzp-c-sendyourself-container">
+      {% if include_title %}
+        <h3 class="mzp-c-sendyourself-title">
+        {% if title_text %}
+          {{ title_text }}
+        {% else %}
+          {{ _('Send Firefox to your smartphone or tablet') }}
+        {% endif %}
+        </h3>
+      {% endif %}
+      <h3 class="mzp-c-sendyourself-title mzp-u-hidden mzp-js-thanks-title">{{ _('Your download link was sent.') }}</h3>
+      <form id="{{ id }}-form" class="mzp-c-sendyourself-form" action="{{ url('firefox.send-to-device-post') }}" method="post">
+        <ul class="mzp-c-form-errors mzp-u-hidden">
+          <li class="mzp-js-error-sms">{{ _('Sorry, we can’t send SMS messages to this phone number.') }}</li>
+          <li class="mzp-js-error-email">{{ _('Please enter an email address.') }}</li>
+          <li class="mzp-js-error-system">{{ _('An error occurred in our system. Please try again later.') }}</li>
+        </ul>
+        <div class="mzp-u-hidden">
+          <input type="hidden" name="source-url" value="{{ request.build_absolute_uri(request.path) }}">
+          <input type="hidden" name="message-set" value="{{ message_set }}">
+        </div>
+        <p class="mzp-c-sendyourself-field">
+          <label for="{{ id }}-input" class="mzp-js-input-label" data-alt="{{ _('Enter your email or phone number') }}">{{ _('Enter your email') }}</label>
+          <input id="{{ id }}-input" class="mzp-c-sendyourself-input" name="phone-or-email" type="text" required>
+          <button type="submit" class="mzp-c-button">{{ _('Send') }}</button>
+        </p>
+        <p class="mzp-c-sendyourself-note mzp-js-note-sms">
+          {{ _('SMS service available in select countries only. SMS &amp; data rates may apply.') }}
+          {{ _('The intended recipient of the email or SMS must have consented.') }} <a href="{{ url('privacy.notices.websites') }}#campaigns">{{ _('Learn more') }}</a>
+        </p>
+        <p class="mzp-c-sendyourself-note mzp-js-note-email">
+          {{ _('The intended recipient of the email must have consented.') }} <a href="{{ url('privacy.notices.websites') }}#campaigns">{{ _('Learn more') }}</a>
+        </p>
+        <div class="mzp-c-sendyourself-thanks mzp-u-hidden">
+          <p class="mzp-js-thanks-sms">{{ _('Check your device for the email or text message!') }}</p>
+          <p class="mzp-js-thanks-email">{{ _('Check your device for the email!') }}</p>
+          <a class="mzp-js-send-another" href="#" role="button">{{ _('Send to another device') }}</a>
+        </div>
+        <div class="mzp-js-loading-spinner mzp-u-hidden"></div>
+      </form>
+    </div>
+  </section>
+{%- endmacro %}

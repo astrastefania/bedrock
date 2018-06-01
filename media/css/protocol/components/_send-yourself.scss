@@ -1,0 +1,30 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+@import "../../../../node_modules/@mozilla-protocol/core/protocol/css/includes/lib";
+
+.mzp-c-sendyourself {
+    @include text-body-md;
+    background: $color-purple;
+
+    .mzp-c-form-errors {
+        background: $color-yellow-light;
+        border: 2px solid $color-yellow-dark;
+        color: $color-primary;
+        margin: 0 0 1em;
+        padding: $spacing-sm $spacing-md;
+
+        ul {
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: .5em;
+        }
+    }
+}
+
+.mzp-c-sendyourself-title {
+    @include text-display-sm;
+}
