@@ -112,7 +112,7 @@ def deploy(region, config, appname, stageName, namespace) {
              "CONFIG_BRANCH=${region.config_branch}",
              "NAMESPACE=${namespace}",
              "DEPLOYMENT_LOG_BASE_URL=${region.deployment_log_base_url}",
-             "DEPLOYMENT_YAML=${deployYaml}"]) /{
+             "DEPLOYMENT_YAML=${deployYaml}"]) {
         try {
             sh 'bin/deploy.sh'
         } catch(err) {
