@@ -20,7 +20,7 @@ git commit -m "set image to ${DEPLOYMENT_DOCKER_IMAGE}" || echo "nothing new to 
 git push
 DEPLOYMENT_VERSION=$(git rev-parse --short HEAD)
 
-DEPLOYMENT_NAME=$(python3 -c "import yaml; print(yaml.load(open(\"$DEPLOYMENT_YAML\"))['metadata']['name'])")
+DEPLOYMENT_NAME=$(python3 -c "import yaml; print(yaml.load(open(\"$NAMESPACE/$DEPLOYMENT_YAML\"))['metadata']['name'])")
 CHECK_URL=$DEPLOYMENT_LOG_BASE_URL/$NAMESPACE/$DEPLOYMENT_NAME/$DEPLOYMENT_VERSION
 attempt_counter=0
 max_attempts=600
