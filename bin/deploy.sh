@@ -23,12 +23,12 @@ DEPLOYMENT_VERSION=$(git rev-parse --short HEAD)
 DEPLOYMENT_NAME=$(python3 -c "import yaml; print(yaml.load(open(\"$NAMESPACE/$DEPLOYMENT_YAML\"))['metadata']['name'])")
 CHECK_URL=$DEPLOYMENT_LOG_BASE_URL/$NAMESPACE/$DEPLOYMENT_NAME/$DEPLOYMENT_VERSION
 attempt_counter=0
-max_attempts=600
+max_attempts=60
 until $(curl --output /dev/null --silent --head --fail $CHECK_URL); do
     if [ ${attempt_counter} -eq ${max_attempts} ]; then
         echo "Deployment incomplete"
         exit 1
     fi
     attempt_counter=$(($attempt_counter+1))
-    sleep 1
+    sleep 10
 done
