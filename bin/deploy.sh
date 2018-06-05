@@ -4,7 +4,7 @@ set -ex
 
 . ${BASH_SOURCE%/*}/../docker/bin/set_git_env_vars.sh
 
-if [[ -e ${CONFIG_CHECKOUT:=${BASH_SOURCE%/*}/..config_checkout} ]];
+if [[ -e ${CONFIG_CHECKOUT:=${BASH_SOURCE%/*}/..config_checkout} ]]; then
     cd ${CONFIG_CHECKOUT}
     git checkout ${CONFIG_BRANCH:=master}
     git pull
