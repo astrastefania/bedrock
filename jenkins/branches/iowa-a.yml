@@ -9,3 +9,6 @@ apps:
 integration_tests:
   iowa-a:
     - headless
+    - download
+    - firefox
+    - chrome
