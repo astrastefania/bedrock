@@ -101,10 +101,11 @@ def pushDeis(region, config, appname, stageName) {
 
 def deploy(region, config, appname, stageName, namespace) {
 
+    def deployYaml = ""
     if (config.demo) {
-        def deployYaml = demoDeployYaml(env.BRANCH_NAME)
+        deployYaml = demoDeployYaml(env.BRANCH_NAME)
     } else {
-        def deployYaml = "deploy.yaml"
+        deployYaml = "deploy.yaml"
     }
 
     withEnv(["CONFIG_REPO=${region.config_repo}",
