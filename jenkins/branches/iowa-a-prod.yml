@@ -8,7 +8,7 @@ apps:
   - bedrock-stage
   - bedrock-prod
 integration_tests:
-  oregon-b:
+  iowa-a:
     - headless
     - firefox
     - chrome
