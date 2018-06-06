@@ -14,7 +14,7 @@ else
 fi
 
 set -u
-sed -ie "s|image: .*|image: ${DEPLOYMENT_DOCKER_IMAGE}|" ${NAMESPACE}/${DEPLOYMENT_YAML:=deploy.yaml}
+sed -i -e "s|image: .*|image: ${DEPLOYMENT_DOCKER_IMAGE}|" ${NAMESPACE}/${DEPLOYMENT_YAML:=deploy.yaml}
 git add ${NAMESPACE}/${DEPLOYMENT_YAML}
 git commit -m "set image to ${DEPLOYMENT_DOCKER_IMAGE}" || echo "nothing new to commit"
 git push
