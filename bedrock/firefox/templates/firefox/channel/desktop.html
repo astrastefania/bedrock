@@ -37,8 +37,9 @@
     </header>
     {{ download_firefox('beta', platform='desktop', force_direct=True, alt_copy=_('Download'), dom_id="desktop-beta-download") }}
     <p class="notice">
-      {{_('Firefox Beta automatically sends feedback to Mozilla.')}}
-      <a href="{{ url('privacy.notices.firefox') + '#telemetry' }}">{{_('Learn more')}}</a>
+      {%- trans link=url('privacy.notices.firefox')+'#telemetry' -%}
+        By default, Beta sends data to Mozilla — and in some cases to our partners — to help us find and fix problems. <a href="{{ link }}">Learn what data is shared.</a>
+      {%- endtrans -%}
     </p>
     <p class="notice">
       {% trans feedback='https://input.mozilla.com/feedback' %}
@@ -66,8 +67,9 @@
     </header>
     {{ download_firefox('alpha', platform='desktop', force_direct=True, alt_copy=_('Download'), dom_id="desktop-developer-download") }}
     <p class="notice">
-      {{_('Firefox Developer Edition automatically sends feedback to Mozilla.')}}
-      <a href="{{ url('privacy.notices.firefox') + '#telemetry' }}">{{_('Learn more')}}</a>
+      {%- trans link=url('privacy.notices.firefox')+'#telemetry' -%}
+        Developer Edition is an unstable testing and development platform. By default, Developer Edition sends data to Mozilla — and in some cases to our partners — to help us find and fix problems. <a href="{{ link }}">Learn what data is shared.</a>
+      {%- endtrans -%}
     </p>
   </div>
   <footer>
@@ -95,8 +97,9 @@
     </header>
     {{ download_firefox('nightly', platform='desktop', force_direct=True, alt_copy=_('Download'), dom_id="desktop-nightly-download") }}
     <p class="notice">
-      {{_('Firefox Nightly automatically sends feedback to Mozilla.')}}
-      <a href="{{ url('privacy.notices.firefox') + '#telemetry' }}">{{_('Learn more')}}</a>
+      {%- trans link=url('privacy.notices.firefox')+'#telemetry' -%}
+        Nightly is an unstable testing and development platform. By default, Nightly sends data to Mozilla — and in some cases to our partners — to help us find and fix problems. <a href="{{ link }}">Learn what data is shared.</a>
+      {%- endtrans -%}
     </p>
   </div>
   <footer>
