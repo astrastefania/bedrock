@@ -23,6 +23,8 @@
   {% endif %}
 {% endblock %}
 
+
+
 {% block content %}
 
 <main id="main-content">
@@ -38,7 +40,11 @@
 
     <div class="map">
       {% block map %}{% endblock %}
-      <small>© <a href="{{ link_openstreetmap }}">OpenStreetMap</a> contributors.</small>
+      <small>    
+        {% trans link_openstreetmap='http://openstreetmap.org/copyright' %}
+          © <a href="{{ link_openstreetmap }}">OpenStreetMap</a> contributors.
+        {% endtrans %}
+      </small>
     </div>
 
     <div class="page-content">
@@ -58,9 +64,11 @@
     {% trans link_openstreetmap='http://openstreetmap.org/copyright' %}
       Maps © <a href="{{ link_openstreetmap }}">OpenStreetMap</a> contributors.
     {% endtrans %}
+
     {% trans %}
       Community photos courtesy of Mozilla contributors, used with permission.
     {% endtrans %}
+
     </p>
   </div>
 </main>
